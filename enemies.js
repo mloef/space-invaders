@@ -36,8 +36,31 @@ class Enemies {
     show() {
         for (var i = 0; i < this.livingEnemies.length; i++) {
             for (var j = 0; j < this.livingEnemies[i].length; j++) {
-                image(this.enemySprite, this.x + this.scl * j * SPREAD_FACTOR, this.y + this.scl * i * SPREAD_FACTOR);
+                if (!this.livingEnemies[i][j]) {
+                    image(this.enemySprite, this.x + this.scl * j * SPREAD_FACTOR, this.y + this.scl * i * SPREAD_FACTOR);
+                }
             }
         }
     }
+
+    checkCollision(x, y) {
+        for (var i = 0; i < this.livingEnemies.length; i++) {
+            for (var j = 0; j < this.livingEnemies[i].length; j++) {
+                if (this.livingEnemies[i][j]) {
+                    var enemyX = this.x + this.scl * j * SPREAD_FACTOR;
+                    var enemyY = this.y + this.scl * i * SPREAD_FACTOR;
+
+                    if (x >= enemyX && x <= enemyX + this.scl * SPREAD_FACTOR && y >= enemyY && y <= enemyY + this.scl * SPREAD_FACTOR) {
+                        this.livingEnemies[i][j] = false;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+
 }  

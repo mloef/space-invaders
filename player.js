@@ -19,4 +19,8 @@ class Player {
     show() {
         image(this.playerSprite, this.x, height * 28/30);
     }
+
+    getX() {
+        return this.x;
+    }
 }  
