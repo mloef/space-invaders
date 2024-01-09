@@ -16,7 +16,10 @@ class Enemies {
         this.x -= this.xOffset;
 
         var enemiesRow = new Array(cols).fill(true);
-        this.livingEnemies = new Array(rows).fill(enemiesRow);
+        this.livingEnemies = [];
+        for (var i = 0; i < rows; i++)  {
+            this.livingEnemies.push(enemiesRow.slice());
+        }
     }
 
   
@@ -36,7 +39,7 @@ class Enemies {
     show() {
         for (var i = 0; i < this.livingEnemies.length; i++) {
             for (var j = 0; j < this.livingEnemies[i].length; j++) {
-                if (!this.livingEnemies[i][j]) {
+                if (this.livingEnemies[i][j]) {
                     image(this.enemySprite, this.x + this.scl * j * SPREAD_FACTOR, this.y + this.scl * i * SPREAD_FACTOR);
                 }
             }
